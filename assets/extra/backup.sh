@@ -5,7 +5,6 @@ FILES_TO_BACKUP=(
     "/etc/fstab"
     "$HOME/.bashrc"
     "$HOME/.zshrc"
-    "$HOME/.config/kitty"
 )
 
 # Function to set backup location

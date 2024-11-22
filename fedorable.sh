@@ -12,10 +12,10 @@ PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/snap/bin
 # Dialog dimensions
 HEIGHT=20
 WIDTH=90
-CHOICE_HEIGHT=10
+CHOICE_HEIGHT=9
 
 # Titles and messages
-BACKTITLE="Fedorable v2.0 - A Fedora Post Install Setup Util for GNOME - By Smittix - https://smittix.net"
+BACKTITLE="Init Fedora v1.0 - A Fedora Post Install Setup Util for GNOME - By Vextorite"
 TITLE="Please Make a Selection"
 MENU="Please Choose one of the following options:"
 
@@ -39,14 +39,13 @@ fi
 OPTIONS=(
     1 "Enable RPM Fusion - Enables RPM Fusion Repositories"
     2 "Update Firmware - For systems that support firmware delivery"
-    3 "Speed up DNF - Sets max parallel downloads to 10"
-    4 "Enable Flathub - Enables FlatHub & installs packages located in flatpak-packages.txt"
-    5 "Install Software - Installs software located in dnf-packages.txt"
-    6 "Install Oh-My-ZSH - Installs Oh-My-ZSH & Starship Prompt"
-    7 "Install Extras - Themes, Fonts, and Codecs"
-    8 "Install Nvidia - Install akmod Nvidia drivers"
-    9 "Customise - Configures system settings"
-    10 "Quit"
+    3 "Enable Flathub - Enables FlatHub & installs packages located in flatpak-packages.txt"
+    4 "Install Software - Installs software located in dnf-packages.txt"
+    5 "Install Oh-My-ZSH - Installs Oh-My-ZSH & Starship Prompt"
+    6 "Install Extras - Themes, Fonts, and Codecs"
+    7 "Install Nvidia - Install akmod Nvidia drivers"
+    8 "Customise - Configures system settings"
+    9 "Quit"
 )
 
 # Function to display notifications
@@ -81,13 +80,6 @@ update_firmware() {
     notify "System Firmware Updated"
 }
 
-# Function to speed up DNF
-speed_up_dnf() {
-    echo "Speeding Up DNF"
-    echo 'max_parallel_downloads=10' | sudo tee -a /etc/dnf/dnf.conf
-    notify "Your DNF config has now been amended"
-}
-
 # Function to enable Flatpak
 enable_flatpak() {
     echo "Enabling Flatpak"
@@ -120,6 +112,7 @@ install_oh_my_zsh() {
     sudo -u "$SUDO_USER" chsh -s "$(which zsh)"
     sudo -u "$SUDO_USER" curl -sS https://starship.rs/install.sh | sh
     sudo -u "$SUDO_USER" echo 'eval "$(starship init zsh)"' >> ~/.zshrc
+    starship preset gruvbox-rainbow -o ~/.config/starship.toml
     notify "Oh-My-Zsh is ready to rock n roll"
 }
 
@@ -134,10 +127,10 @@ install_extras() {
     sudo dnf group upgrade -y --with-optional Multimedia
     sudo dnf config-manager --set-enabled fedora-cisco-openh264
     sudo dnf install -y gstreamer1-plugin-openh264 mozilla-openh264
-    sudo dnf copr enable peterwu/iosevka -y
     sudo dnf update -y
     sudo dnf install -y iosevka-term-fonts jetbrains-mono-fonts-all terminus-fonts terminus-fonts-console google-noto-fonts-common fira-code-fonts cabextract xorg-x11-font-utils fontconfig
     sudo rpm -i https://downloads.sourceforge.net/project/mscorefonts2/rpms/msttcore-fonts-installer-2.6-1.noarch.rpm
+    sudo rpm -i https://code.visualstudio.com/docs/?dv=linux64_rpm
     notify "All done"
 }
 
@@ -221,13 +214,12 @@ while true; do
     case $CHOICE in
         1) enable_rpm_fusion ;;
         2) update_firmware ;;
-        3) speed_up_dnf ;;
-        4) enable_flatpak ;;
-        5) install_software ;;
-        6) install_oh_my_zsh ;;
-        7) install_extras ;;
-        8) install_nvidia ;;
-        9) 
+        3) enable_flatpak ;;
+        4) install_software ;;
+        5) install_oh_my_zsh ;;
+        6) install_extras ;;
+        7) install_nvidia ;;
+        8) 
             # Customization menu
             while true; do
                 CUSTOM_CHOICE=$(dialog --clear --backtitle "Fedora System Configuration" \
