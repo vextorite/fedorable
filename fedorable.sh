@@ -128,7 +128,7 @@ install_extras() {
     sudo dnf config-manager --set-enabled fedora-cisco-openh264
     sudo dnf install -y gstreamer1-plugin-openh264 mozilla-openh264
     sudo dnf update -y
-    sudo dnf install -y iosevka-term-fonts jetbrains-mono-fonts-all terminus-fonts terminus-fonts-console google-noto-fonts-common fira-code-fonts cabextract xorg-x11-font-utils fontconfig
+    sudo dnf install -y iosevka-term-fonts jetbrains-mono-fonts-all terminus-fonts terminus-fonts-console google-noto-fonts-common fira-code-fonts cabextract xorg-x11-font-utils fontconfig --skip-unavailable
     sudo rpm -i https://downloads.sourceforge.net/project/mscorefonts2/rpms/msttcore-fonts-installer-2.6-1.noarch.rpm
     sudo rpm -i https://code.visualstudio.com/docs/?dv=linux64_rpm
     notify "All done"
@@ -224,7 +224,7 @@ while true; do
             while true; do
                 CUSTOM_CHOICE=$(dialog --clear --backtitle "Fedora System Configuration" \
                     --title "Customization Menu" \
-                    --menu "Choose an option:" 15 50 8 \
+                    --menu "Choose an option:" 15 50 9 \
                     1 "Set Hostname" \
                     2 "Setup Custom Fonts" \
                     3 "Customize Clock" \

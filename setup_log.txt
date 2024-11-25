@@ -1,0 +1,8 @@
+2024-11-22 21:17:28 - Installed dialog.
+2024-11-22 21:18:20 - Software has been installed
+2024-11-22 21:18:48 - Oh-My-Zsh is ready to rock n roll
+2024-11-22 21:19:23 - All done
+2024-11-22 21:19:54 - Invalid option selected: 9
+2024-11-22 21:19:56 - Invalid option selected: 9
+2024-11-22 21:20:01 - Invalid option selected: 9
+2024-11-22 21:20:03 - Invalid option selected: 
